@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maverick Shop</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="FILE.js.js"></script>
+</head>
+<body>
+<script src="FILE.js.js"></script>
+<header class="header">
+  <a href="1.html" class="header-logo">Maverick Shop</a>
+  <nav class="navbar">
+    <a href="1.html">Home</a>
+    <a href="T-SHIRTS.html">T-Shirts</a>
+    <a href="HOODIES.html">Hoodies</a>
+    <a href="SNEAKERS.html">Sneakers</a>
+    <a href="cart.html">Cart</a>∂
+  </nav>
+</header>
+
+<main class="main-content">
+  <section class="hero-section">
+    <h1 class="hero-title">Online Fashion Store</h1>
+    <p class="hero-description">Discover the Latest Trends. Welcome to our Online Fashion Store, where you can find the most stylish and high-quality products tailored just for you!</p>
+  </section>
+
+  <section class="product-grid">
+    <!-- T-Shirts -->
+    <article class="product-card">
+      <img src="path_to_image/tshirt_featured.jpg" alt="Featured T-shirt" class="product-image">
+      <h2 class="product-title">New Arrival T-shirts</h2>
+      <p class="product-description">Experience comfort like never before.</p>
+      <a href="T-SHIRTS.html" class="cta-button">Shop Now</a>
+    </article>
+
+    <!-- Hoodies -->
+    <article class="product-card">
+      <img src="path_to_image/hoodie_featured.jpg" alt="Featured Hoodie" class="product-image">
+      <h2 class="product-title">Warm and Stylish Hoodies</h2>
+      <p class="product-description">Stay warm without sacrificing style.</p>
+      <a href="HOODIES.html" class="cta-button">Shop Now</a>
+    </article>
+
+    <!-- Sneakers -->
+    <article class="product-card">
+      <img src="path_to_image/sneaker_featured.jpg" alt="Featured Sneaker" class="product-image">
+      <h2 class="product-title">Step up with Sneakers</h2>
+      <p class="product-description">Define your stride with our latest collection.</p>
+      <a href="SNEAKERS.html" class="cta-button">Shop Now</a>
+    </article>
+  </section>
+  <div class="todo-container">
+    <h1>To-Do List</h1>
+    <div class="todo-input">
+      <input type="text" id="task" placeholder="Enter a task">
+      <button onclick="addTask()">Add</button>
+    </div>
+    <ul id="task-list">
+
+    </ul>
+  </div>
+
+
+  <form id="myForm">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <span id="email-error" class="error"></span>
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <span id="password-error" class="error"></span>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+
+</main>
+
+<footer class="footer">
+  <p>&copy; 2023 Maverick Shop</p>
+</footer>
+</body>
+</html>
