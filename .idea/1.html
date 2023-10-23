@@ -5,31 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maverick Shop</title>
   <link rel="stylesheet" href="style.css">
-  <script src="FILE.js.js"></script>
+  <style>
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+    .success-message {
+      color: green;
+      font-size: 16px;
+    }
+    .todo-container, .feedback-section {
+      margin-top: 20px;
+    }
+    .todo-item {
+      margin-bottom: 10px;
+    }
+    .todo-item span, .feedback-section textarea, .feedback-section button {
+      margin-right: 10px;
+    }
+    .edit-input {
+      display: none;
+    }
+    .feedback-section textarea {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+    }
+    .feedback-section button {
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-<script src="FILE.js.js"></script>
 <header class="header">
-  <a href="1.html" class="header-logo">Maverick Shop</a>
+  <a href="1.html" class="header-logo"></a>
   <nav class="navbar">
     <a href="1.html">Home</a>
     <a href="T-SHIRTS.html">T-Shirts</a>
     <a href="HOODIES.html">Hoodies</a>
     <a href="SNEAKERS.html">Sneakers</a>
-    <a href="cart.html">Cart</a>∂
+    <a href="cart.html">Cart</a>
+    <a href="profile.html">Profile</a>
   </nav>
 </header>
 
 <main class="main-content">
   <section class="hero-section">
-    <h1 class="hero-title">Online Fashion Store</h1>
+    <h1 class="hero-title">Maverick Fashion Store</h1>
     <p class="hero-description">Discover the Latest Trends. Welcome to our Online Fashion Store, where you can find the most stylish and high-quality products tailored just for you!</p>
   </section>
 
   <section class="product-grid">
     <!-- T-Shirts -->
     <article class="product-card">
-      <img src="path_to_image/tshirt_featured.jpg" alt="Featured T-shirt" class="product-image">
+      <img src="https://tommy-europe.scene7.com/is/image/TommyEurope/KS0KS00210_BDS_alternate1?$b2c_updp_m_mainImage_1920$" alt="Featured T-shirt" class="product-image">
       <h2 class="product-title">New Arrival T-shirts</h2>
       <p class="product-description">Experience comfort like never before.</p>
       <a href="T-SHIRTS.html" class="cta-button">Shop Now</a>
@@ -37,7 +67,7 @@
 
     <!-- Hoodies -->
     <article class="product-card">
-      <img src="path_to_image/hoodie_featured.jpg" alt="Featured Hoodie" class="product-image">
+      <img src="https://m.media-amazon.com/images/S/shoppable-media-external-prod-iad-us-east-1/2246b705-9fae-44e9-bea3-819dbc25c439/e7d37-27b6-47d2-acc6-2bececcb7._SX828_Q60_.jpeg" alt="Featured Hoodie" class="product-image">
       <h2 class="product-title">Warm and Stylish Hoodies</h2>
       <p class="product-description">Stay warm without sacrificing style.</p>
       <a href="HOODIES.html" class="cta-button">Shop Now</a>
@@ -45,40 +75,102 @@
 
     <!-- Sneakers -->
     <article class="product-card">
-      <img src="path_to_image/sneaker_featured.jpg" alt="Featured Sneaker" class="product-image">
+      <img src="https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/9e807aad-42e9-46e5-8f08-34e141e718e5/court-legacy-mens-shoes-75ljqX.png" alt="Featured Sneaker" class="product-image">
       <h2 class="product-title">Step up with Sneakers</h2>
       <p class="product-description">Define your stride with our latest collection.</p>
       <a href="SNEAKERS.html" class="cta-button">Shop Now</a>
     </article>
   </section>
+
   <div class="todo-container">
-    <h1>To-Do List</h1>
+    <h1>Wishlist</h1>
     <div class="todo-input">
-      <input type="text" id="task" placeholder="Enter a task">
+      <input type="text" id="task" placeholder="Enter a product">
       <button onclick="addTask()">Add</button>
     </div>
-    <ul id="task-list">
-
-    </ul>
+    <ul id="task-list"></ul>
   </div>
+
+  <section class="feedback-section">
+    <h1>Feedback</h1>
+    <textarea id="feedback-text" placeholder="Enter your feedback here..." rows="4"></textarea>
+    <button onclick="sendFeedback()">Send Feedback</button>
+    <p id="feedback-success" class="success-message" style="display: none;">Thank you for your feedback!</p>
+  </section>
 
 
   <form id="myForm">
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required>
-    <span id="email-error" class="error"></span>
     <br>
     <label for="password">Password:</label>
     <input type="password" id="password" name="password" required>
-    <span id="password-error" class="error"></span>
     <br>
     <input type="submit" value="Submit">
   </form>
-
 </main>
 
 <footer class="footer">
   <p>&copy; 2023 Maverick Shop</p>
 </footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    // Wishlist Functionality
+    const taskInput = document.getElementById('task');
+    const taskList = document.getElementById('task-list');
+
+    function addTask() {
+      const taskValue = taskInput.value;
+      if (taskValue) {
+        const listItem = document.createElement('li');
+        listItem.className = 'todo-item';
+        listItem.innerHTML = `<span>${taskValue}</span> <button onclick="editTask(this)">Edit</button> <button onclick="deleteTask(this)">Delete</button> <input type="text" class="edit-input">`;
+
+        taskList.appendChild(listItem);
+        taskInput.value = '';
+      }
+    }
+
+    window.addTask = addTask;
+
+    window.editTask = function (btn) {
+      const listItem = btn.parentNode;
+      const span = listItem.querySelector('span');
+      const editInput = listItem.querySelector('.edit-input');
+      const isEditing = listItem.classList.contains('editing');
+
+      if (isEditing) {
+        span.innerText = editInput.value;
+        btn.innerText = 'Edit';
+      } else {
+        editInput.value = span.innerText;
+        btn.innerText = 'Save';
+      }
+
+      listItem.classList.toggle('editing');
+    }
+
+    window.deleteTask = function (btn) {
+      const listItem = btn.parentNode;
+      listItem.remove();
+    }
+
+    // Feedback Functionality
+    const feedbackText = document.getElementById('feedback-text');
+    const feedbackSuccess = document.getElementById('feedback-success');
+
+    function sendFeedback() {
+      const feedbackValue = feedbackText.value;
+      if (feedbackValue) {
+        feedbackText.value = '';
+        feedbackSuccess.style.display = 'block';
+      }
+    }
+
+    window.sendFeedback = sendFeedback;
+  });
+</script>
+
 </body>
 </html>

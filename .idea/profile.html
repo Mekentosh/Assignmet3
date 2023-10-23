@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>User Profile</h2>
+  <form id="profileForm">
+    <div class="form-group">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName">
+      <div class="error" id="firstNameError"></div>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName">
+      <div class="error" id="lastNameError"></div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="text" id="email">
+      <div class="error" id="emailError"></div>
+    </div>
+    <button type="submit">Save Changes</button>
+  </form>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('profileForm');
+    const firstName = document.getElementById('firstName');
+    const lastName = document.getElementById('lastName');
+    const email = document.getElementById('email');
+    const firstNameError = document.getElementById('firstNameError');
+    const lastNameError = document.getElementById('lastNameError');
+    const emailError = document.getElementById('emailError');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      let hasError = false;
+
+      if (firstName.value.trim() === '') {
+        firstNameError.innerText = 'Please enter your first name.';
+        hasError = true;
+      } else {
+        firstNameError.innerText = '';
+      }
+
+      if (lastName.value.trim() === '') {
+        lastNameError.innerText = 'Please enter your last name.';
+        hasError = true;
+      } else {
+        lastNameError.innerText = '';
+      }
+
+      if (!validateEmail(email.value)) {
+        emailError.innerText = 'Please enter a valid email address.';
+        hasError = true;
+      } else {
+        emailError.innerText = '';
+      }
+
+      if (!hasError) {
+        alert('Profile Updated Successfully!');
+      }
+    });
+
+    function validateEmail(email) {
+      const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+  });
+</script>
+</body>
+</html>
