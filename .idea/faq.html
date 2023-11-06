@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maverick Shop</title>
+  <link rel="stylesheet" href="style.css">
+
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #333;
+      color: #fff;
+      padding-top: 30px;
+      min-height: 70px;
+      border-bottom: 1px solid #bbb;
+    }
+    .header a {
+      color: #ffffff;
+      padding: 0 20px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 20px;
+    }
+    .header-logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-around;
+    }
+    .hero-section {
+      padding: 30px;
+      background: #eee;
+      text-align: center;
+    }
+    .hero-title {
+      font-size: 2em;
+    }
+    .theme-toggle-button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .faq-section h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .accordion-item {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .accordion-content {
+      display: none;
+      padding: 10px;
+      border-top: 1px solid #ddd;
+    }
+    .accordion-item.active .accordion-content {
+      display: block;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-30px);
+      }
+      60% {
+        transform: translateY(-15px);
+      }
+    }
+  </style>
+</head>
+<body>
+<header class="header">
+  <a href="#" class="header-logo">Maverick Shop</a>
+  <nav class="navbar">
+    <a href="1.html">Home</a>
+
+  </nav>
+</header>
+
+<main class="main-content">
+  <section class="hero-section">
+    <h1 class="hero-title">FAQ</h1>
+    <p class="hero-description"></p>
+    <button id="animateTitle">Bounce FAQ!</button>
+  </section>
+
+  <section class="faq-section">
+    <h1>FAQ</h1>
+    <div class="accordion">
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <h2 class="accordion-title">What payment methods do you accept?</h2>
+        <p class="accordion-content">We accept various payment methods including credit/debit cards, PayPal, and online banking.</p>
+      </div>
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <h2 class="accordion-title">How long does delivery take?</h2>
+        <p class="accordion-content">Delivery usually takes 3-5 business days depending on your location.</p>
+      </div>
+      <div class="accordion-item" onclick="toggleAccordion(this)">
+        <h2 class="accordion-title">Can I return a product?</h2>
+        <p class="accordion-content">Yes, you can return a product within 30 days of purchase. Please check our return policy for more details.</p>
+      </div>
+    </div>
+  </section>
+
+  <button class="theme-toggle-button" onclick="toggleTheme()">Toggle Theme</button>
+</main>
+
+<script>
+  function toggleAccordion(element) {
+    const accordionItems = document.querySelectorAll('.accordion-item');
+    accordionItems.forEach(item => {
+      if (item === element) {
+        item.classList.toggle('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+  }
+
+  function toggleTheme() {
+    document.body.classList.toggle('dark-theme');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const animateTitleButton = document.getElementById('animateTitle');
+    const heroTitle = document.querySelector('.hero-title');
+
+    animateTitleButton.addEventListener('click', () => {
+      heroTitle.style.animation = 'bounce 1s';
+      setTimeout(() => heroTitle.style.animation = '', 1000);
+    });
+  });
+</script>
+</body>
+</html>
